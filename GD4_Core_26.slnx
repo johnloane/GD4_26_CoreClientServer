@@ -1,0 +1,13 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="Client/Client.vcxproj">
+    <BuildDependency Project="GD4_Core_26/GD4_Core_26.vcxproj" />
+  </Project>
+  <Project Path="GD4_Core_26/GD4_Core_26.vcxproj" />
+  <Project Path="Server/Server.vcxproj">
+    <BuildDependency Project="GD4_Core_26/GD4_Core_26.vcxproj" />
+  </Project>
+</Solution>
