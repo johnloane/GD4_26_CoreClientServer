@@ -11,6 +11,8 @@ Take input from the user, send it to the server and listen and display the resul
 
 int main()
 {
+	Player* new_player = new Player();
+	std::cout << "Size of a player is: " << sizeof(new_player) << std::endl;
 	SocketUtil::StaticInit();
 	UDPSocketPtr client_socket = SocketUtil::CreateUDPSocket(INET);
 	client_socket->SetNonBlockingMode(false);
