@@ -7,6 +7,7 @@ public:
 
 	void ProcessReceivedData(char* receive_buffer, int bytes_received, const SocketAddress& sender_address, int requests, bool service_running);
 	std::string ReturnCurrentDateAndTime();
+	void ReceivePlayerInputByteStream(const UDPSocketPtr server_socket);
 
 private:
 

@@ -15,7 +15,7 @@ uint16_t Player::GetHealth() const
     return health_;
 }
 
-uint8_t Player::GetAmmo() const
+uint16_t Player::GetAmmo() const
 {
     return ammo_;
 }
@@ -43,7 +43,7 @@ void Player::Read(InputMemoryStream & in_stream)
 void Player::ToString() const
 {
     std::cout << name_ << " has health: " << health_ << ", Ammo: " << ammo_ << " Position: " << "(" << position_.mX << ", " << position_.mY << ", " << position_.mZ << ")" << "Quaternion: (" << rotation_.mX << ", " << rotation_.mY << ", " << rotation_.mZ << ", " << rotation_.mW << ")" << std::endl;
-    for (const uint8_t weapon : weapons_)
+    for (const int weapon : weapons_)
     {
         std::cout << weapon << std::endl;
     }

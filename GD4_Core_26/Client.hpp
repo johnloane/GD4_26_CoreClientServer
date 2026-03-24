@@ -4,6 +4,7 @@ class Client
 public:
 	Client(UDPSocketPtr client_socket, string server_address);
 	void DoServiceLoop();
+	void SendPlayerOutputByteStream(UDPSocketPtr client_socket, Player new_player);
 
 private:	
 	void PrintOptions();
@@ -18,6 +19,7 @@ private:
 	void ReceiveDataFromServer(char* receive_buffer, SocketAddress sender_address, int bytes_received, bool& service_running);
 
 	void ProcessReceivedData(char* receive_buffer, int bytes_received, SocketAddress sender_address, bool& service_running);
+	
 
 private:
 	UDPSocketPtr client_socket_;

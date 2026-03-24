@@ -4,7 +4,7 @@ class Player
 public:
 	Player();
 	uint16_t GetHealth() const;
-	uint8_t GetAmmo() const;
+	uint16_t GetAmmo() const;
 	void Write(OutputMemoryStream& out_stream) const;
 	void Read(InputMemoryStream& in_stream);
 	void ToString() const;
@@ -13,11 +13,11 @@ public:
 
 private:
 	uint16_t health_;
-	uint8_t ammo_;
+	uint16_t ammo_;
 	char name_[128];
 	Vector3 position_;
 	Quaternion rotation_;
-	vector<uint8_t> weapons_;
+	vector<int> weapons_;
 	
 };
 

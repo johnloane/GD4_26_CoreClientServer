@@ -7,7 +7,8 @@ int main()
 	UDPSocketPtr server_socket = SocketUtil::CreateUDPSocket(INET);
 	server_socket->SetNonBlockingMode(false);
 	Server server = Server(server_socket, "127.0.0.1");
-	server.DoServiceLoop();
+	//server.DoServiceLoop();
+	server.ReceivePlayerInputByteStream(server_socket);
 }
 
 Server::Server(UDPSocketPtr server_socket, string server_address)
@@ -98,4 +99,20 @@ std::string Server::ReturnCurrentDateAndTime()
 	std::stringstream ss;
 	ss << std::put_time(std::localtime(&in_time_t), "%Y-%m-%d %X");
 	return ss.str();
+}
+
+void Server::ReceivePlayerInputByteStream(const UDPSocketPtr server_socket)
+{
+	Player* receiver = new Player();
+	SocketAddress sender_address;
+
+	char* temporary_buffer = static_cast<char*>(std::malloc(kMaxPacketSize));
+	std::cout << "Server waiting for input on the socket" << std::endl;
+	int bytes_received = server_socket->ReceiveFrom(temporary_buffer, kMaxPacketSize, sender_address);
+	InputMemoryStream in_stream(temporary_buffer, static_cast<uint32_t>(bytes_received));
+	receiver->Read(in_stream);
+	std::cout << "Received: " << bytes_received << std::endl;
+	receiver->ToString();
+	std::cin.ignore();
+
 }

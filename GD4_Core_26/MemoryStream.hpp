@@ -1,6 +1,6 @@
 #define STREAM_ENDIANNESS 0
 #define PLATFORM_ENDIANNESS 0
-
+#include <iostream>
 
 class OutputMemoryStream
 {
@@ -40,6 +40,7 @@ public:
 	void Write(const std::vector< int >& inIntVector)
 	{
 		size_t elementCount = inIntVector.size();
+		std::cout << elementCount << std::endl;
 		Write(elementCount);
 		Write(inIntVector.data(), elementCount * sizeof(int));
 	}

@@ -17,7 +17,8 @@ int main()
 	UDPSocketPtr client_socket = SocketUtil::CreateUDPSocket(INET);
 	client_socket->SetNonBlockingMode(false);
 	Client client = Client(client_socket, "127.0.0.1");
-	client.DoServiceLoop();
+	//client.DoServiceLoop();
+	client.SendPlayerOutputByteStream(client_socket, *new_player);
 	SocketUtil::CleanUp();
 }
 
@@ -138,6 +139,16 @@ void Client::ProcessReceivedData(char* receive_buffer, int bytes_received, Socke
 
 	std::cout << "Got " << bytes_received << " from " << sender_address.ToString() << std::endl;
 	std::cout << "The message is: " << receive_buffer << std::endl;
+}
+
+void Client::SendPlayerOutputByteStream(UDPSocketPtr client_socket, Player new_player)
+{
+	SocketAddress server_address = SocketAddress(SocketUtil::ConvertIPStringToInt("127.0.0.1"), 50000);
+	OutputMemoryStream out_stream;
+	new_player.Write(out_stream);
+	int bytes_sent = client_socket->SendTo(out_stream.GetBufferPtr(), out_stream.GetLength(), server_address);
+	std::cout << "Sent: " << bytes_sent << std::endl;
+	std::cin.ignore();
 }
 
 
