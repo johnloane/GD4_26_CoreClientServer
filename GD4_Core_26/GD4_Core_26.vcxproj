@@ -129,6 +129,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="MemoryBitStream.cpp" />
     <ClCompile Include="MemoryStream.cpp" />
     <ClCompile Include="player.cpp" />
     <ClCompile Include="Server.cpp" />
@@ -144,6 +145,7 @@
     <ClInclude Include="choice.hpp" />
     <ClInclude Include="constants.hpp" />
     <ClInclude Include="Math.hpp" />
+    <ClInclude Include="MemoryBitStream.hpp" />
     <ClInclude Include="MemoryStream.hpp" />
     <ClInclude Include="player.hpp" />
     <ClInclude Include="Server.hpp" />

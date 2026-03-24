@@ -4,7 +4,8 @@ class Client
 public:
 	Client(UDPSocketPtr client_socket, string server_address);
 	void DoServiceLoop();
-	void SendPlayerOutputByteStream(UDPSocketPtr client_socket, Player new_player);
+	void SendPlayerOutputByteStream(UDPSocketPtr client_socket, Player* new_player);
+	void SendPlayerOutputBitStream(UDPSocketPtr client_socket, Player* new_player);
 
 private:	
 	void PrintOptions();
