@@ -10,12 +10,12 @@ Player::Player()
     , weapons_{ 60, 70, 80, 90, 100 }
 {}
 
-uint16_t Player::GetHealth() const
+uint32_t Player::GetHealth() const
 {
     return health_;
 }
 
-uint16_t Player::GetAmmo() const
+uint32_t Player::GetAmmo() const
 {
     return ammo_;
 }
@@ -45,6 +45,7 @@ void Player::Write(OutputMemoryBitStream& out_bit_stream) const
     out_bit_stream.WriteBits(health_, 4);
     out_bit_stream.WriteBits(ammo_, 2);
     uint8_t name_length = static_cast<uint8_t>(strlen(name_));
+    std::cout << "Write namelength " << static_cast<int>(name_length) << std::endl;
     out_bit_stream.WriteBits(name_length, 8);
     out_bit_stream.WriteBits(name_, (name_length * 8));
     //Position uses entropy encoding
@@ -57,12 +58,18 @@ void Player::Write(OutputMemoryBitStream& out_bit_stream) const
 void Player::ReadBits(InputMemoryBitStream & in_bit_stream)
 {
     uint8_t name_length;
-    in_bit_stream.Read(health_);
-    in_bit_stream.Read(ammo_);
-    in_bit_stream.ReadBits(name_length, 8);
-    in_bit_stream.ReadBits(name_, (name_length * 8));
+    in_bit_stream.ReadBits(&health_, 4);
+    std::cout << "Health " << health_ << std::endl;
+    in_bit_stream.ReadBits(&ammo_, 2);
+    std::cout << "Health " << ammo_ << std::endl;
+    in_bit_stream.ReadBits(&name_length, 8);
+    std::cout << "Name Length " << static_cast<int>(name_length) << std::endl;
+    in_bit_stream.ReadBits(&name_, ((static_cast<int>(name_length)) * 8));
+    std::cout << "Name " << name_ << std::endl;
     in_bit_stream.ReadPos(position_);
+    std::cout << "Position " << position_.mX << std::endl;
     in_bit_stream.Read(rotation_);
+    std::cout << "Rotation " << rotation_.mX << std::endl;
     in_bit_stream.Read(weapons_);
 }
 

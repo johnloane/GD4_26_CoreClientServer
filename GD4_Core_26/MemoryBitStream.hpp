@@ -64,7 +64,7 @@ public:
 	template< typename T >
 	void Write(const std::vector< T >& inVector)
 	{
-		uint32_t elementCount = inVector.size();
+		uint32_t elementCount = static_cast<uint32_t>(inVector.size());
 		Write(elementCount);
 		for (const T& element : inVector)
 		{
@@ -134,7 +134,7 @@ public:
 	template< typename T >
 	void Read(std::vector< T >& outVector)
 	{
-		size_t elementCount;
+		uint32_t elementCount;
 		Read(elementCount);
 		outVector.resize(elementCount);
 		for (T& element : outVector)
